@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzy.moban.mapper.AppMapper">
+
+	<select id="get"  parameterType="app" resultType="app">
+		select id,name,logo,os,tag,packName,packName_ios,version,creator,createTime,lastModifyTime,userCount,monthActiveUser,
+			pushCount,monthPushCount,appKey,appMasterSecret,certificateFile,certificatePassword ,departApprover,appApprover from appInfo
+			<where>
+				<if test="id!=null">id=#{id}</if>
+			</where>
+			order by id  desc
+	</select>
+
+	<select id="getByWhere" parameterType="String" resultType="app">
+		select * from appInfo 
+		<where>
+		<if test="_parameter!=null">${_parameter}</if>
+		</where>	 
+	</select>
+	
+	<select id="getByKey" parameterType="string" resultType="app">
+		select * from appInfo where appKey=#{appKey}
+	</select>
+
+	<select id="getById" parameterType="int" resultType="app">
+		select * from appInfo where id=#{id}
+	</select>
+	
+	
+	
+
+</mapper>
