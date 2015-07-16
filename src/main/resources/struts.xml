@@ -11,7 +11,7 @@
 
 		<action name="test2" class="com.mzy.moban.action.AppAction">
 			<result name="aaa" type="freemarker">/ftl3/authority.ftl</result>
-            <result name="bbb" type="freemarker">/ftl3/authority.ftl</result>
+            <result name="bbb" type="freemarker">/ftl/authorityList.ftl</result>
             <!--<result name="bbb" type="freemarker">/ftl3/authority.ftl</result>-->
 		</action>
 
