@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzy.moban.mapper.App_userMapper">
+	<sql id="Base_Column_List">
+		id,customer_id,app_account,app_secret,easemob_accout,easemob_secret
+	</sql>
+
+	<select id="get"  parameterType="app_user" resultType="app_user">
+		select  <include refid="Base_Column_List" /> from app_users
+			<where>
+				<if test="id!=null">id=#{id}</if>
+			</where>
+			order by id  desc
+	</select>
+
+	<select id="getById" parameterType="int" resultType="app_user">
+		select * from appInfo where id=#{id}
+	</select>
+
+
+	<insert id="insert" parameterType="app_user" useGeneratedKeys="true" keyProperty="id">
+		insert into app_users(customer_id,app_account,app_secret,easemob_accout,easemob_secret)
+		values(#{customer_id},#{app_account},#{app_secret},#{easemob_accout},#{easemob_secret})
+	</insert>
+
+
+	<select id="getByWhere" parameterType="String" resultType="app_user">
+		select * from app_users
+		<where>
+			<if test="_parameter!=null">${_parameter}</if>
+		</where>
+	</select>
+
+
+	<select id="getByAppAccount" parameterType="String" resultType="app_user">
+		select * from app_users where app_account=#{app_account}
+	</select>
+
+	<select id="getByAppAccountAndPwd" parameterType="Map" resultType="app_user">
+		select * from app_users where app_account=#{phone} and app_secret=#{password}
+	</select>
+
+	
+
+</mapper>

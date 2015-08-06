@@ -1,33 +1,29 @@
-/**
- * 	Utils说明：  基础工具类
- * 
- * 	API ：
- *		Utils.Cookie.get(name);								//获取一个值
- *
- * */
+function delCookie(name) {
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval = getCookie(name);
+	if (cval != null)
+		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
 
-//基础工具类
-var Utils = {};
-//html cookie存储
-Utils.Cookie={
-	cookiesBuffer: "",
-	nStartIndex: -1,
-	nEndIndex: -1,
-	vStartIndex: -1,
-	vEndIndex: -1
-};
-//获取一个值
-Utils.Cookie.get = function(name){
-	this.cookiesBuffer = "; " + document.cookie + ";";
-	this.nStartIndex = this.cookiesBuffer.indexOf("; " + name + "=");
-	if(this.nStartIndex == -1){
-		return -1;
-	} else{
-		this.nStartIndex += 2;
-		this.nEndIndex = this.nStartIndex + name.length;
-		this.vStartIndex = this.nEndIndex + 2;
-		var cTempStr = this.cookiesBuffer.slice(this.vStartIndex);
-		this.vEndIndex = cTempStr.indexOf(";") + this.vStartIndex;
-		return this.cookiesBuffer.slice(this.vStartIndex-1,this.vEndIndex);
+function setCookie(Name, cookievalue) {
+	var Days = 1;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+	var newcookie = Name + "=" + encodeURIComponent(cookievalue);
+	document.cookie = newcookie + ";expires=" + exp.toGMTString();
+}
+
+function getCookie(name) {
+	var result = null;
+	var myCookie = document.cookie + ";";
+	var searchName = name + "=";
+	var startOfCookie = myCookie.indexOf(searchName);
+	var endOfCookie;
+	if (startOfCookie != -1) {
+		startOfCookie += searchName.length;
+		endOfCookie = myCookie.indexOf(";", startOfCookie);
+		result = decodeURIComponent(myCookie.substring(startOfCookie, endOfCookie));
 	}
-};
+	return result;
+}

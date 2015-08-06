@@ -20,7 +20,7 @@
         <jackson.version>2.2.3</jackson.version>
         <struts2.version>2.3.16.1</struts2.version>
         <freemarker.version>2.3.18</freemarker.version>
-        <jedis.version>2.1.0</jedis.version>
+        <jedis.version>2.7.3</jedis.version>
         <httpClient.version>4.1.1</httpClient.version>
         <dom4j.version>1.6</dom4j.version>
         <servlet.version>3.1.0</servlet.version>
@@ -140,11 +140,11 @@
             <version>3.2.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>commons-httpclient</groupId>-->
+            <!--<artifactId>commons-httpclient</artifactId>-->
+            <!--<version>3.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -170,6 +170,11 @@
             <artifactId>httpclient</artifactId>
             <version>${httpClient.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpClient.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -177,11 +182,7 @@
             <version>4.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>${httpClient.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -280,10 +281,54 @@
             <version>3.4.5</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.ifeng.cmpp</groupId>-->
+            <!--<artifactId>cmpp_util</artifactId>-->
+            <!--<version>1.0.4</version>-->
+        <!--</dependency>-->
+
+
         <dependency>
-            <groupId>com.ifeng.cmpp</groupId>
-            <artifactId>cmpp_util</artifactId>
-            <version>1.0.4</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.39</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+
+        <!-- spring AOP -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.12</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2</version>
         </dependency>
 
     </dependencies>
@@ -335,18 +380,26 @@
 
             <properties>
                 <ipushms.upload.dir>/data/apache-tomcat-7.0.41/webapps/upload</ipushms.upload.dir>
-                <ipushms.commmandQueue></ipushms.commmandQueue>
-                <ipushms.pushServer.blackList></ipushms.pushServer.blackList>
-                <ipushms.ios.pushUrl>http://223.203.209.236:8766/push/notify</ipushms.ios.pushUrl>
-                <ipushms.io.feedbackUrl>http://223.203.209.236:8766/push/feedback</ipushms.io.feedbackUrl>
 
 
 
-                <jdbc.url>jdbc:mysql://223.203.209.236:3306/ipush</jdbc.url>
-                <jdbc.username>ipush</jdbc.username>
-                <jdbc.password>ipush</jdbc.password>
 
-                <queue.URL>failover:(tcp://223.203.209.236:61616)?initialReconnectDelay=100</queue.URL>
+                <jdbc.url>jdbc:mysql://101.200.197.39:3306/ucarapp</jdbc.url>
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>ucar20150720</jdbc.password>
+
+
+                <redis.ip>127.0.0.1</redis.ip>
+                <redis.port>6379</redis.port>
+                <redis.maxActive>4</redis.maxActive>
+                <redis.maxIdle>4</redis.maxIdle>
+                <redis.stat.maxActive>4</redis.stat.maxActive>
+                <redis.stat.maxIdle>4</redis.stat.maxIdle>
+
+
+                <redis.config.maxActive>4</redis.config.maxActive>
+                <redis.config.maxIdle>4</redis.config.maxIdle>
+
 
             </properties>
 

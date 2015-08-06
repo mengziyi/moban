@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzy.moban.mapper.BrandInfoMapper">
+	<sql id="Base_Column_List">
+		id,brandNameEN,brandNameCN,mileage,mileage_max
+	</sql>
+
+	<select id="get"  parameterType="brandinfo" resultType="brandinfo">
+		select  <include refid="Base_Column_List" /> from brandinfo
+			<where>
+				<if test="id!=null">id=#{id}</if>
+			</where>
+			order by id  desc
+	</select>
+
+</mapper>

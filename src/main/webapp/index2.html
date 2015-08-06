@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<script type="text/javascript" src='res/js/jquery.min.js'></script>
+</head>
+
+<label>电话(用户名)</label><input type="text" id="phone">
+<label>车牌</label><input type="text" id="licensePlate">
+<label>密码</label><input type="text" id="password">
+<input type="button" onclick="register()" value="注册">
+<input type="button" onclick="aquireAccount()" value="登录">
+
+
+
+<div id="register">register</div>
+<div id="login">login</div>
+
+
+<script>
+	function register() {
+		var data = {};
+		data["phone"] = $("#phone").val();
+		data["password"] = $("#password").val();
+		data["licensePlate"] = $("#licensePlate").val();
+
+
+		$.post("app_user!register.jhtml", data)
+						.success(function (data2) {
+							var retObj = JSON.parse(data2);
+
+							if (retObj.success) {
+								alert("suc");
+								var usefulObj= JSON.parse(retObj.msg);
+								console.log(usefulObj);
+								$("#register").html(usefulObj.hdb_caseinfo.personName+"---->"+usefulObj.hdb_caseinfo.phone);
+							} else {
+								alert("fail");
+								$("#register").html(data2);
+							}
+						})
+						.error(function (data2) {
+							$("#register").html(data2);
+
+						});
+
+
+	}
+
+	function aquireAccount() {
+		var data = {};
+		data["phone"] = $("#phone").val();
+		data["password"] = $("#password").val();
+		$.post("app_user!aquireAccount.jhtml", data)
+						.success(function (data2) {
+							var retObj = JSON.parse(data2);
+							console.log(retObj)
+							if (retObj.success) {
+								alert("suc");
+								var usefulObj= JSON.parse(retObj.msg);
+								console.log(usefulObj);
+								$("#login").html(usefulObj.app_user.easemob_accout+"----:-----"+usefulObj.app_user.easemob_secret);
+							} else {
+								alert("fail");
+								$("#login").html(data2);
+							}
+						})
+						.error(function (data2) {
+							$("#register").html(data2);
+
+						});
+
+
+	}
+
+</script>
+
+</body>
+</html>

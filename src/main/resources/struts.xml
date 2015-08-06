@@ -3,28 +3,45 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <include file="struts-default.xml"/>
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
     <package name="default" extends="struts-default" namespace="/">
 
 
 
-		<action name="test2" class="com.mzy.moban.action.AppAction">
-			<result name="aaa" type="freemarker">/ftl3/authority.ftl</result>
-            <result name="bbb" type="freemarker">/ftl/authorityList.ftl</result>
-            <!--<result name="bbb" type="freemarker">/ftl3/authority.ftl</result>-->
-		</action>
+
+        <interceptors>
+            <interceptor-stack name="cookieStack">
+                <interceptor-ref name="cookie">
+                    <param name="cookiesName">ipush_cn,ipush_user,ipush_token</param>
+                    <param name="cookiesValue">*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <result name="result" type="freemarker">/ftl/result.ftl</result>
+            <result name="msg" type="freemarker">/ftl/msg.ftl</result>
+
+        </global-results>
+
+        <!--<action name="test2" class="com.mzy.moban.action.AppAction">-->
+            <!--<result name="bbb" type="freemarker">/app/add.ftl</result>-->
+            <!--<result name="ccc" type="freemarker">/app/add.ftl</result>-->
+            <!--<result name="www" type="freemarker">/app/add.ftl</result>-->
+            <!--&lt;!&ndash;<result name="bbb" type="freemarker">/ftl3/authority.ftl</result>&ndash;&gt;-->
+        <!--</action>-->
 
 
+        <action name="app_user" class="com.mzy.moban.action.App_userAction">
+            <result name="register" type="freemarker">/ftl/result.ftl</result>
+            <result name="aquireAccount" type="freemarker">/ftl/result.ftl</result>
 
 
+        </action>
 
-			</package>
 
-    	   
+    </package>
 
-    
-
-    
 
 </struts>

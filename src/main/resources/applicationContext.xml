@@ -3,10 +3,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:context="http://www.springframework.org/schema/context"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans
-				http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-				http://www.springframework.org/schema/context
-				http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+		xsi:schemaLocation="http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd "
+	   xmlns:aop="http://www.springframework.org/schema/aop"
 >
 
 
@@ -22,7 +24,32 @@
 	 
 	<context:property-placeholder location="
 										classpath:/conf/jdbc.properties,
-										classpath:/conf/ipushms.properties"/>
+										classpath:/conf/redis.properties"/>
+
+
+	<!--<bean name="redisCacheForStat" class="com.mzy.moban.util.RedisCache">-->
+		<!--<property name="jedisPool" ref="jedisPoolStat" />-->
+	<!--</bean>-->
+
+
+	<!--<bean id="jedisPoolStat" class="redis.clients.jedis.JedisPool">-->
+		<!--<constructor-arg index="0">-->
+			<!--<bean class="redis.clients.jedis.JedisPoolConfig">-->
+				<!--<property name="maxTotal" value="${redis.stat.maxActive}"/>-->
+				<!--<property name="maxIdle" value="${redis.stat.maxIdle}"/>-->
+			<!--</bean>-->
+		<!--</constructor-arg>-->
+		<!--<constructor-arg index="1">-->
+			<!--<value>${redis.stat.ip}</value>-->
+		<!--</constructor-arg>-->
+		<!--<constructor-arg index="2">-->
+			<!--<value>${redis.stat.port}</value>-->
+		<!--</constructor-arg>-->
+		<!--<constructor-arg index="3">-->
+			<!--<value>2000</value>-->
+		<!--</constructor-arg>-->
+
+	<!--</bean>-->
 	 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driver}"/>
@@ -64,7 +91,19 @@
 
 		<!-- spring获取Bean工具 -->
 	<bean id="SpringContextUtil" class="com.mzy.moban.util.SpringContextUtil"/>
-		
+
+	<!--<aop:config>-->
+		<!--<aop:aspect id="exceptionHandlerAspect" ref="exceptionHandler">-->
+			<!--&lt;!&ndash;配置com.spring.service包下所有类或接口的所有方法&ndash;&gt;-->
+			<!--<aop:pointcut id="businessService" expression="execution(* com.mzy.moban.service.*.*(..))"/>-->
+			<!--<aop:around pointcut-ref="businessService" method="doAround"/>-->
+		<!--</aop:aspect>-->
+	<!--</aop:config>-->
+
+	<bean id="exceptionHandler" class="com.mzy.moban.exception.handler.ExceptionHandler" />
+
+
+
 
 </beans>
 

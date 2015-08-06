@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzy.moban.mapper.Hdb_caseinfoMapper">
+    <sql id="Base_Column_List">id,personName,phone,licensePlate</sql>
+    <select id="getByPhoneAndLicense" parameterType="Map" resultType="hdb_caseinfo">
+        select <include refid="Base_Column_List" />
+        from hdb_caseinfo where phone=#{phone} and licensePlate=#{licensePlate}
+    </select>
+
+
+
+    <select id="get"  parameterType="hdb_caseinfo" resultType="hdb_caseinfo">
+        select  <include refid="Base_Column_List" /> from hdb_caseinfo
+        <where>
+            <if test="id!=null">id=#{id}</if>
+        </where>
+        order by id  desc
+    </select>
+
+</mapper>
